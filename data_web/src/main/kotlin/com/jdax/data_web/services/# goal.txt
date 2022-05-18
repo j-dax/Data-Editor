@@ -1,0 +1,35 @@
+# goal
+write a very high level script/instruction
+and have the program execute
+e.g.
+
+data
+[
+    [  1 ,  2 ,  3 ,  4 ],
+    [ 'a', 'b', 'c', 'd']
+]
+
+script
+<workbook readFrom="NA"> <!-- edit this workbook -->
+    <sheet name="Sheet1">
+        <delete /> <!-- delete entire sheet contents -->
+        <delete row="1" shift="true" /> <!-- delete row 1, shift all other rows
+        <filter ...>
+            ???
+        </filter>
+        <write row="0"> <!-- write headers -->
+            <List>
+                <Item>...</Item>
+                <Item>...</Item>
+                <Item>...</Item>
+                <Item>...</Item>
+                <Item>...</Item>
+                <Item>...</Item>
+            </List>
+        </write>
+    </sheet>
+</workbook>
+
+<workbook readFrom="NA" /> <!-- copy entire workbook to another -->
+
+<workbook> <sheet ... /> </workbook> <!-- new workbook, must specify at least one sheet --> 

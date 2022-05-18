@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    function convertTableToArray(table) {
+        var contents = Array.from(table.getElementsByTagName("tr"))
+                .map(row => Array.from(row.getElementsByTagName("td"))
+                        .map(cell => cell.innerText))
+        console.log(contents)
+        return contents
+    }
+
+    function doSubmit() {
+        var tableArray = convertTableToArray(document.getElementById("contents")) // convert the table here
+        // submit the table to the api
+        var xhr = new XMLHttpRequest()
+        xhr.open("POST", "/wbKey/sheetName/window", true)
+        xhr.setRequestHeader("Content-Type", "application/json")
+        xhr.send(JSON.stringify(tableArray))
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    alert("response received " + xhr.responseText)
+                } else {
+                    alert("something went wrong")
+                }
+            }
+        }
+    }
+</script>
+
+<body>
+    <div>
+        <form>
+            <table id="contents">
+                <thead>
+                    <tr>
+                        <td>h0</td>
+                        <td>h1</td>
+                        <td>h2</td>
+                        <td>h3</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>a</td>
+                        <td>b</td>
+                        <td>c</td>
+                        <td>d</td>
+                    </tr>
+                    <tr>
+                        <td>e</td>
+                        <td>f</td>
+                        <td>g</td>
+                        <td>h</td>
+                    </tr>
+                    <tr>
+                        <td>i</td>
+                        <td>j</td>
+                        <td>k</td>
+                        <td>l</td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="submit" value="Upload" onclick="doSubmit()" />
+        </form>
+    </div>
+
+</body>
+
+</html>
